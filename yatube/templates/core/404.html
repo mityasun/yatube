@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Ошибка 404{% endblock %}
+{% block content %}
+  <div class="container py-5">
+    <h1>Ошибка 404</h1>
+    <p>Страницы с адресом {{ path }} не существует</p>
+    <a href="{% url 'posts:index' %}" class="btn btn-success btn-sm mb-1">Вернуться главную</a>
+  </div>
+{% endblock %}

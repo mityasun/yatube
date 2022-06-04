@@ -1,0 +1,36 @@
+{% load thumbnail %}
+<article>
+  <div class="card mb-3">
+    <div class="card-header">
+      <ul>
+        {% if author %}
+          <li>Автор: {{ post.author.get_full_name }}</li>
+        {% else %}
+          <li>Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a></li>
+        {% endif %}
+          <li>Дата публикации: {{ post.pub_date|date:"d E Y H:i" }}</li>
+      </ul>
+    </div>
+    <div class="card-body">
+      {% thumbnail post.image "960x350" crop="center" upscale=True as im %}
+        <img class="card-img my-2" src="{{ im.url }}">
+      {% endthumbnail %}
+      {% if post.text|length > 500 %}
+        <p>{{ post.text|truncatechars_html:500|linebreaksbr }}</p>
+        <p><a href="{% url 'posts:post_detail' post.pk %}" class="btn btn-outline-dark btn-sm">Читать далее</a></p>
+      {% else %}
+        <p>{{ post.text|linebreaksbr }}</p>
+        <p><a href="{% url 'posts:post_detail' post.pk %}" class="btn btn-outline-dark btn-sm">Читать далее</a></p>
+      {% endif %}
+    </div>
+    {% if not group %}
+      <div class="card-footer">
+      {% if post.group %}
+        Сообщество: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>
+      {% else %}
+        <span style='color:gray'>Этой записи нет ни в одном сообществе</span>
+      {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</arcticle>

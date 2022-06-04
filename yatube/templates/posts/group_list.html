@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+  {% block title %}
+    Записи сообщества {{ group }}
+  {% endblock %}
+  {% block content %} 
+    <div class="container py-5">
+      <div class="mb-5"> 
+        <h1>{{ group }}</h1>
+        <p>{{ group.description|linebreaks }}</p>
+      </div>
+      {% for post in page_obj %}
+      {% include 'posts/includes/post_card.html' %}
+      {% endfor %}
+      {% include 'posts/includes/paginator.html' %}
+    </div>  
+  {% endblock %}

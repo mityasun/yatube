@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+  {% block title %}Запись: {{ post.text|truncatechars_html:30 }}{% endblock %}
+  {% block content %}
+  {% load thumbnail %}
+    <div class="container py-5">
+      <div class="card">
+        <div class="row g-0">
+          <aside class="col-12 col-md-4">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Дата публикации: {{ post.pub_date|date:"d E Y" }}
+              </li>
+              <li class="list-group-item">
+              {% if post.group %}
+                Сообщество: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>
+              {% else %}
+                <span style='color:gray'>Этой записи нет ни в одном сообществе</span>
+              {% endif %}
+              </li>
+              <li class="list-group-item">
+                Автор: {{ post.author.get_full_name }}
+              </li>
+              <li class="list-group-item">
+                {% if post.author == request.user %}
+                  Всего моих записей: <span>{{ post.author.posts.count }}</span>
+                {% else %}
+                  Всего записей автора: <span>{{ post.author.posts.count }}</span>
+                {% endif %}
+              </li>
+              <li class="list-group-item">
+                {% if post.author == request.user %}
+                  <a href="{% url 'posts:profile' post.author %}" class="btn btn-outline-primary btn-sm">Все мои записи</a>
+                {% else %}
+                  <a href="{% url 'posts:profile' post.author %}" class="btn btn-outline-primary btn-sm">Все записи автора</a>
+                {% endif %}
+              </li>
+              {% if post.author == request.user %}
+              <li class="list-group-item">
+                <a href="{% url 'posts:post_edit' post.id %}" class="btn btn-outline-success btn-sm mb-1">Редактировать запись</a>
+                <a href="{% url 'posts:post_delete' post.id %}" class="btn btn-outline-danger btn-sm mb-1">Удалить запись</a>
+              </li>
+              {% endif %}
+            </ul>
+          </aside>
+          <article class="col-12 col-md-8">
+            <div class="card-body">
+              {% thumbnail post.image "960x500" crop="center" upscale=True as im %}
+                <img class="card-img my-2" src="{{ im.url }}">
+              {% endthumbnail %}
+              <p>{{ post.text|linebreaksbr }}</p> 
+              <hr>
+              {% include 'posts/includes/comments.html' %}
+            </div>
+          </article>
+        </div>
+      </div> 
+    </div
+  {% endblock %}

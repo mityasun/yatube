@@ -3,7 +3,7 @@ import tempfile
 from http import HTTPStatus
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -165,9 +165,10 @@ class PostFormTests(TestCase):
                         HTTPStatus.FOUND
                     )
                 else:
+                    login = reverse(settings.LOGIN_URL)
                     self.assertRedirects(
                         response,
-                        f'{settings.LOGIN_URL}{reverse_name}',
+                        f'{login}?{REDIRECT_FIELD_NAME}={reverse_name}',
                         HTTPStatus.FOUND
                     )
         self.assertEqual(self.post_qty, self.post_qty)
@@ -176,9 +177,10 @@ class PostFormTests(TestCase):
         """Гость не может создавать записи."""
         reverse_name = reverse('posts:post_create')
         response = self.client.post(reverse_name)
+        login = reverse(settings.LOGIN_URL)
         self.assertRedirects(
             response,
-            f'{settings.LOGIN_URL}{reverse_name}',
+            f'{login}?{REDIRECT_FIELD_NAME}={reverse_name}',
             HTTPStatus.FOUND
         )
 
@@ -217,9 +219,10 @@ class PostFormTests(TestCase):
             data=comment_data,
             follow=True,
         )
+        login = reverse(settings.LOGIN_URL)
         self.assertRedirects(
             response,
-            f'{settings.LOGIN_URL}{reverse_name}',
+            f'{login}?{REDIRECT_FIELD_NAME}={reverse_name}',
             HTTPStatus.FOUND
         )
         self.assertEqual(Comment.objects.count(), 0)

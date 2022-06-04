@@ -108,7 +108,7 @@ LIMIT_POSTS: int = 10
 CUT_TEXT: int = 15
 
 
-LOGIN_URL = '/auth/login/?next='
+LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'

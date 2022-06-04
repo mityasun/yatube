@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
 from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
@@ -129,9 +129,10 @@ class PostURLTests(TestCase):
             with self.subTest(reverse_name=reverse_name):
                 if url in rederict_urls:
                     response = self.client.get(reverse_name, follow=True)
+                    login = reverse(settings.LOGIN_URL)
                     self.assertRedirects(
                         response,
-                        f'{settings.LOGIN_URL}{reverse_name}',
+                        f'{login}?{REDIRECT_FIELD_NAME}={reverse_name}',
                         HTTPStatus.FOUND
                     )
                 else:

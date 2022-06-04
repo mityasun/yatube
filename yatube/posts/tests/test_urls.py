@@ -2,9 +2,9 @@ from http import HTTPStatus
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.core.cache import cache
 
 from ..models import Group, Post
 
@@ -40,6 +40,11 @@ class PostURLTests(TestCase):
              f'/posts/{cls.post.id}/edit/'),
             ('posts:post_delete', (cls.post.id,), None,
              f'/posts/{cls.post.id}/delete/'),
+            ('posts:follow_index', None, 'posts/follow.html', '/follow/'),
+            ('posts:profile_follow', (cls.user,), None,
+             f'/profile/{cls.user.username}/follow/'),
+            ('posts:profile_unfollow', (cls.user,), None,
+             f'/profile/{cls.user.username}/unfollow/'),
         )
 
     def setUp(self):
@@ -58,37 +63,50 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_author(self):
         """Проверка доступности адресов страниц для автора."""
-        rederict_urls = ('posts:post_delete',)
+        rederict_to_profile = (
+            'posts:post_delete',
+            'posts:profile_follow',
+            'posts:profile_unfollow',
+        )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
-                if url in rederict_urls:
+                if url in rederict_to_profile:
                     response = self.authorized_client.get(
                         reverse_name, follow=True
                     )
                     rederict = reverse('posts:profile', args=(self.user,))
                     self.assertRedirects(response, rederict, HTTPStatus.FOUND)
                 else:
-                    response = self.authorized_client.get(reverse_name)
+                    response = self.authorized_client.get(
+                        reverse_name
+                    )
                     self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_urls_exists_at_desired_location_for_user(self):
         """Проверка доступности адресов страниц для пользователя."""
-        rederict_urls = (
-            ('posts:post_edit'),
-            ('posts:post_delete'),
+        rederict_to_profile = (
+            'posts:post_delete',
+            'posts:profile_follow',
+            'posts:profile_unfollow',
+        )
+        rederict_to_post_detail = (
+            'posts:post_edit',
         )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
-                if url in rederict_urls:
+                if url in rederict_to_profile:
                     response = self.authorized_client_no_author.get(
                         reverse_name, follow=True
                     )
-                    if reverse_name == reverse('posts:post_delete', args=args):
-                        rederict = reverse('posts:profile', args=(self.user,))
-                    else:
-                        rederict = reverse('posts:post_detail', args=args)
+                    rederict = reverse('posts:profile', args=(self.user,))
+                    self.assertRedirects(response, rederict, HTTPStatus.FOUND)
+                elif url in rederict_to_post_detail:
+                    response = self.authorized_client_no_author.get(
+                        reverse_name, follow=True
+                    )
+                    rederict = reverse('posts:post_detail', args=args)
                     self.assertRedirects(response, rederict, HTTPStatus.FOUND)
                 else:
                     response = self.authorized_client_no_author.get(
@@ -101,7 +119,10 @@ class PostURLTests(TestCase):
         rederict_urls = (
             'posts:post_create',
             'posts:post_edit',
-            'posts:post_delete'
+            'posts:post_delete',
+            'posts:follow_index',
+            'posts:profile_follow',
+            'posts:profile_unfollow',
         )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
@@ -119,7 +140,11 @@ class PostURLTests(TestCase):
 
     def test_urls_uses_correct_template_for_author(self):
         """Проверка использования шаблонов страниц."""
-        without_template = ('posts:post_delete',)
+        without_template = (
+            'posts:post_delete',
+            'posts:profile_follow',
+            'posts:profile_unfollow',
+        )
         for url, args, template, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):

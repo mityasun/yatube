@@ -1,12 +1,10 @@
 import re
 import tempfile
 
-from django.contrib.auth import get_user_model
-from django.db.models.fields.related import ForeignKey
-from django.core.paginator import Page
-
 import pytest
-
+from django.contrib.auth import get_user_model
+from django.core.paginator import Page
+from django.db.models.fields.related import ForeignKey
 
 try:
     from posts.models import Post

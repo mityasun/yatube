@@ -7,7 +7,7 @@
     <a href="{% url 'posts:profile' comment.author.username %}">{{ comment.author.username }}</a>
     <span class="text-muted">{{ comment.created }}</span>
     </h6>
-    <p>{{ comment.text }}</p>
+    <p>{{ comment.text|linebreaksbr }}</p>
   </div>
 </div>
 {% endfor %}

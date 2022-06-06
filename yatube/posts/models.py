@@ -76,6 +76,9 @@ class Comment(models.Model):
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
 
+    def __str__(self):
+        return self.text[:settings.CUT_TEXT]
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -94,3 +97,6 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'подписчик'
         verbose_name_plural = 'подписчики'
+
+    def __str__(self):
+        return self.user.username

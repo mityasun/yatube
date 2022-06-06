@@ -45,6 +45,8 @@ class PostURLTests(TestCase):
              f'/profile/{cls.user.username}/follow/'),
             ('posts:profile_unfollow', (cls.user,), None,
              f'/profile/{cls.user.username}/unfollow/'),
+            ('posts:add_comment', (cls.post.id,), None,
+             f'/posts/{cls.post.id}/comment/'),
         )
 
     def setUp(self):
@@ -68,6 +70,9 @@ class PostURLTests(TestCase):
             'posts:profile_follow',
             'posts:profile_unfollow',
         )
+        rederict_to_post_detail = (
+            'posts:add_comment',
+        )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
@@ -77,6 +82,11 @@ class PostURLTests(TestCase):
                     )
                     rederict = reverse('posts:profile', args=(self.user,))
                     self.assertRedirects(response, rederict, HTTPStatus.FOUND)
+                elif url in rederict_to_post_detail:
+                    response = self.authorized_client.get(
+                        reverse_name, follow=True
+                    )
+                    rederict = reverse('posts:post_detail', args=args)
                 else:
                     response = self.authorized_client.get(
                         reverse_name
@@ -92,6 +102,7 @@ class PostURLTests(TestCase):
         )
         rederict_to_post_detail = (
             'posts:post_edit',
+            'posts:add_comment',
         )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
@@ -123,6 +134,7 @@ class PostURLTests(TestCase):
             'posts:follow_index',
             'posts:profile_follow',
             'posts:profile_unfollow',
+            'posts:add_comment',
         )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
@@ -145,6 +157,7 @@ class PostURLTests(TestCase):
             'posts:post_delete',
             'posts:profile_follow',
             'posts:profile_unfollow',
+            'posts:add_comment',
         )
         for url, args, template, _ in self.urls:
             reverse_name = reverse(url, args=args)

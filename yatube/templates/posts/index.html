@@ -6,9 +6,12 @@
     <div class="container py-5">
       {% include 'posts/includes/switcher.html' %} 
       <h1>Последние обновления на сайте</h1>
+      {% load cache %}
+      {% cache 20 index_page %}
       {% for post in page_obj %}
       {% include 'posts/includes/post_card.html' %}
       {% endfor %}
       {% include 'posts/includes/paginator.html' %}
+      {% endcache %}
     </div>
   {% endblock %}

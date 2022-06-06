@@ -207,6 +207,7 @@ class PostFormTests(TestCase):
                 )
                 comment = Comment.objects.first()
                 self.assertEqual(comment.text, comment.text)
+        self.assertEqual(Comment.objects.count(), 2)
 
     def test_comment_cant_comment(self):
         """Комментарии не могут оставлять гости."""

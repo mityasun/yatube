@@ -90,6 +90,7 @@ class ViewsTests(TestCase):
         self.assertEqual(post.author, self.user)
         self.assertEqual(post.group, self.group)
         self.assertEqual(post.image, f'posts/{self.image}')
+        self.assertContains(response, '<img', count=2)
 
     def test_index_page_show_correct_context(self):
         """Шаблон index сформирован с правильным контекстом."""
@@ -166,11 +167,13 @@ class ViewsTests(TestCase):
             text='Пост для проверки функции удаления',
             group=self.group
         )
+        id_post = post.id
         response = self.authorized_client.get(
             reverse('posts:post_delete', args=(post.id,))
         )
         rederict = reverse('posts:profile', args=(self.user,))
         self.assertRedirects(response, rederict, HTTPStatus.FOUND)
+        self.assertFalse(Post.objects.filter(pk=id_post).exists())
         self.assertEqual(Post.objects.count(), self.post_qty)
         response = self.authorized_client.get(reverse(
             'posts:group_list', args=(self.group.slug,))
@@ -182,18 +185,21 @@ class ViewsTests(TestCase):
 
     def test_cache(self):
         """Проверка работы кэша."""
-        Post.objects.create(
+        post = Post.objects.create(
             author=self.user,
             text='Пост для провери кэша',
             group=self.group
         )
-        response = self.client.get(reverse('posts:index'))
+        response_1 = self.client.get(reverse('posts:index'))
+        self.assertTrue(Post.objects.get(pk=post.id))
         self.authorized_client.get(
-            reverse('posts:post_delete', args=(2,))
+            reverse('posts:post_delete', args=(post.id,))
         )
-        cache.clear()
         response_2 = self.client.get(reverse('posts:index'))
-        self.assertNotEqual(response.content, response_2.content)
+        self.assertEqual(response_1.content, response_2.content)
+        cache.clear()
+        response_3 = self.client.get(reverse('posts:index'))
+        self.assertNotEqual(response_1.content, response_3.content)
 
     def test_users_can_follow_and_unfollow(self):
         """Зарегистрированный пользователь может подписаться и отписаться."""
@@ -217,10 +223,19 @@ class ViewsTests(TestCase):
 
     def test_post_appears_at_feed(self):
         """Пост появляется в лента подписчика."""
-        response = self.authorized_client_no_author.get(
-            reverse('posts:profile_follow', args=(self.user,))
+        Follow.objects.get_or_create(
+            user=self.user_no_author,
+            author=self.user
         )
         response = self.authorized_client_no_author.get(
             reverse('posts:follow_index')
         )
         self.assertContains(response, self.post)
+        Follow.objects.filter(
+            user=self.user_no_author,
+            author__username=self.user.username
+        ).delete()
+        response = self.authorized_client_no_author.get(
+            reverse('posts:follow_index')
+        )
+        self.assertNotContains(response, self.post)

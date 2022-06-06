@@ -1,14 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.cache import cache_page
-
 from posts.utils import paginator
 
 from .forms import CommentForm, PostForm
-from .models import Comment, Follow, Group, Post, User
+from .models import Follow, Group, Post, User
 
 
-@cache_page(20 * 1)
 def index(request):
     """Главная страница с записями."""
     posts = Post.objects.select_related('author', 'group')
@@ -47,11 +44,8 @@ def profile(request, username):
 def post_detail(request, post_id):
     """Страница одной записи."""
     post = get_object_or_404(Post, pk=post_id)
-    comments = Comment.objects.select_related('post').filter(post=post)
-    if request.method == 'POST':
-        return add_comment(request, post_id)
-    else:
-        form = CommentForm()
+    comments = post.comments.select_related('author')
+    form = CommentForm()
     context = {
         'post': post,
         'form': form,
@@ -135,6 +129,8 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     """Функция отписки от автора."""
-    author = get_object_or_404(User, username=username)
-    Follow.objects.filter(user=request.user, author=author).delete()
+    Follow.objects.filter(
+        user=request.user,
+        author__username=username
+    ).delete()
     return redirect('posts:profile', username)

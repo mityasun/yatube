@@ -87,7 +87,7 @@ def post_delete(request, post_id):
     """Функция удаления записи."""
     post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
-        return redirect('posts:profile', post.author.username)
+        return redirect('posts:post_detail', post_id)
     post.delete()
     return redirect('posts:profile', post.author.username)
 

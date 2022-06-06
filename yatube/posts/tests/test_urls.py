@@ -96,11 +96,11 @@ class PostURLTests(TestCase):
     def test_urls_exists_at_desired_location_for_user(self):
         """Проверка доступности адресов страниц для пользователя."""
         rederict_to_profile = (
-            'posts:post_delete',
             'posts:profile_follow',
             'posts:profile_unfollow',
         )
         rederict_to_post_detail = (
+            'posts:post_delete',
             'posts:post_edit',
             'posts:add_comment',
         )

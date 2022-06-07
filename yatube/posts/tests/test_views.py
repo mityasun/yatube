@@ -192,9 +192,7 @@ class ViewsTests(TestCase):
         )
         response_1 = self.client.get(reverse('posts:index'))
         self.assertTrue(Post.objects.get(pk=post.id))
-        self.authorized_client.get(
-            reverse('posts:post_delete', args=(post.id,))
-        )
+        Post.objects.get(pk=post.id).delete()
         response_2 = self.client.get(reverse('posts:index'))
         self.assertEqual(response_1.content, response_2.content)
         cache.clear()

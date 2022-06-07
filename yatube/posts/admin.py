@@ -4,7 +4,7 @@ from .models import Comment, Follow, Group, Post
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('text', 'created', 'author')
+    list_display = ('text', 'author', 'created', 'post')
     search_fields = ('text',)
     list_filter = ('created',)
 

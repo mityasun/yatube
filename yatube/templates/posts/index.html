@@ -7,7 +7,7 @@
       {% include 'posts/includes/switcher.html' %} 
       <h1>Последние обновления на сайте</h1>
       {% load cache %}
-      {% cache 20 index_page %}
+      {% cache 20 sidebar index page_obj.number %}
       {% for post in page_obj %}
       {% include 'posts/includes/post_card.html' %}
       {% endfor %}

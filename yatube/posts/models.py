@@ -69,7 +69,7 @@ class Comment(models.Model):
         blank=True, null=True,
         on_delete=models.SET_NULL,
         related_name='comments',
-        verbose_name='Комментарий'
+        verbose_name='Запись'
     )
 
     class Meta:

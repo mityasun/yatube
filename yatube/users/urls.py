@@ -12,7 +12,7 @@ from . import views
 app_name = 'users'
 
 urlpatterns = [
-    path('signup/', views.SignUp.as_view(), name='signup'),
+    path('signup/', views.register, name='signup'),
     path('logout/',
          LogoutView.as_view(template_name='users/logged_out.html'),
          name='logout'),
@@ -43,4 +43,5 @@ urlpatterns = [
          PasswordResetCompleteView
          .as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('profile/', views.profile, name='profile'),
 ]

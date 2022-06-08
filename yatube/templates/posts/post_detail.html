@@ -8,6 +8,12 @@
           <aside class="col-12 col-md-4">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
+                <img class="rounded mx-auto d-block" src="{{ post.author.profile.profile_pic.url }}">
+              </li>
+              <li class="list-group-item">
+                Автор: {{ post.author.get_full_name }}
+              </li>
+              <li class="list-group-item">
                 Дата публикации: {{ post.pub_date|date:"d E Y" }}
               </li>
               <li class="list-group-item">
@@ -16,9 +22,6 @@
               {% else %}
                 <span style='color:gray'>Этой записи нет ни в одном сообществе</span>
               {% endif %}
-              </li>
-              <li class="list-group-item">
-                Автор: {{ post.author.get_full_name }}
               </li>
               <li class="list-group-item">
                 {% if post.author == request.user %}

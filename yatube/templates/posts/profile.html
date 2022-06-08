@@ -16,9 +16,9 @@
               <h6>Подписчиков: {{ author.following.count }}</h6>
               {% if author.profile.city != None %}<div>Город: {{ author.profile.city }}</div>{% endif %}
               {% if author.profile.vk != None %}<div>Вконтакте: <a href="https://vk.com/{{author.profile.vk}}" target="_blank">{{ author.profile.vk }}</a></div>{% endif %}
-            {% if author.profile.telegram != None %}<div>Telegram: <a href="https://t.me/{{author.profile.telegram}}" target="_blank">{{ author.profile.telegram }}</a></div>{% endif %}
-            {% if author.profile.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.profile.telegram}}" target="_blank">{{ author.profile.instagram }}</a></div>{% endif %}
-            {% if author.profile.git != None %}<div>Git: <a href="https://github.com/{{author.profile.telegram}}" target="_blank">{{ author.profile.git }}</a></div>{% endif %}
+              {% if author.profile.telegram != None %}<div>Telegram: <a href="https://t.me/{{author.profile.telegram}}" target="_blank">{{ author.profile.telegram }}</a></div>{% endif %}
+              {% if author.profile.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.profile.instagram}}" target="_blank">{{ author.profile.instagram }}</a></div>{% endif %}
+              {% if author.profile.git != None %}<div>Git: <a href="https://github.com/{{author.profile.git}}" target="_blank">{{ author.profile.git }}</a></div>{% endif %}
             <br>
             <div>
               {% if following %}
@@ -47,8 +47,8 @@
             {% if author.profile.city != None %}<div>Город: {{ author.profile.city }}</div>{% endif %}
             {% if author.profile.vk != None %}<div>Вконтакте: <a href="https://vk.com/{{author.profile.vk}}" target="_blank">{{ author.profile.vk }}</a></div>{% endif %}
             {% if author.profile.telegram != None %}<div>Telegram: <a href="https://t.me/{{author.profile.telegram}}" target="_blank">{{ author.profile.telegram }}</a></div>{% endif %}
-            {% if author.profile.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.profile.telegram}}" target="_blank">{{ author.profile.instagram }}</a></div>{% endif %}
-            {% if author.profile.git != None %}<div>Git: <a href="https://github.com/{{author.profile.telegram}}" target="_blank">{{ author.profile.git }}</a></div>{% endif %}
+            {% if author.profile.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.profile.instagram}}" target="_blank">{{ author.profile.instagram }}</a></div>{% endif %}
+            {% if author.profile.git != None %}<div>Git: <a href="https://github.com/{{author.profile.git}}" target="_blank">{{ author.profile.git }}</a></div>{% endif %}
           </article>
         </div>
       {% endif %}

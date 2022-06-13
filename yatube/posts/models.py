@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.db import models
-from users.models import User
 
 
 class Group(models.Model):
@@ -20,7 +19,7 @@ class Post(models.Model):
     text = models.TextField('Текст записи', help_text='Текст вашей записи')
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='posts',
         verbose_name='Автор'
@@ -57,7 +56,7 @@ class Comment(models.Model):
     )
     created = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='comments',
         verbose_name='Автор комментария'
@@ -80,13 +79,13 @@ class Comment(models.Model):
 
 class Follow(models.Model):
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='follower',
         verbose_name='Подписчик'
     )
     author = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='following',
         verbose_name='Автор'

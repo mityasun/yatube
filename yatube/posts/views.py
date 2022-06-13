@@ -1,10 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from posts.utils import paginator
-from users.models import User
+from django.contrib.auth import get_user_model
 
 from .forms import CommentForm, PostForm
 from .models import Follow, Group, Post
+from .utils import paginator
+
+User = get_user_model()
 
 
 def index(request):
@@ -122,7 +124,7 @@ def profile_follow(request, username):
     """Функция подписки на автора."""
     author = get_object_or_404(User, username=username)
     follower = request.user
-    if follower != author:
+    if follower != author and follower != author.follower:
         Follow.objects.get_or_create(user=follower, author=author)
     return redirect('posts:profile', username)
 

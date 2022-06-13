@@ -8,10 +8,16 @@
           <aside class="col-12 col-md-4">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
-                <img class="rounded mx-auto d-block" src="{{ post.author.profile.profile_pic.url }}">
+                {% thumbnail post.author.profile_pic "300x300" crop="center" upscale=True as av %}
+                  <img class="rounded mx-auto d-block" src="{{ av.url }}">
+                {% endthumbnail %}
               </li>
               <li class="list-group-item">
-                Автор: {{ post.author.get_full_name }}
+								{% if post.author == request.user %}
+                  Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a>
+                {% else %}
+                  Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a>
+                {% endif %}
               </li>
               <li class="list-group-item">
                 Дата публикации: {{ post.pub_date|date:"d E Y" }}
@@ -28,13 +34,6 @@
                   Всего моих записей: <span>{{ post.author.posts.count }}</span>
                 {% else %}
                   Всего записей автора: <span>{{ post.author.posts.count }}</span>
-                {% endif %}
-              </li>
-              <li class="list-group-item">
-                {% if post.author == request.user %}
-                  <a href="{% url 'posts:profile' post.author %}" class="btn btn-outline-primary btn-sm">Все мои записи</a>
-                {% else %}
-                  <a href="{% url 'posts:profile' post.author %}" class="btn btn-outline-primary btn-sm">Все записи автора</a>
                 {% endif %}
               </li>
               {% if post.author == request.user %}

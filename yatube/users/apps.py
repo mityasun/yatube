@@ -5,6 +5,3 @@ class UsersConfig(AppConfig):
     name = 'users'
     verbose_name = 'Управление пользователями'
 
-    def ready(self):
-        import users.signals
-        users.signals

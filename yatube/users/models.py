@@ -1,18 +1,14 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name='Пользователь',
-    )
+class User(AbstractUser):
     profile_pic = models.ImageField(
         'Аватарка',
         default='users/default.jpeg',
         upload_to='users/',
         null=True, blank=True,
+        help_text='Добавить аватарку',
     )
     city = models.CharField('Город', max_length=50, null=True, blank=True)
     vk = models.CharField('Вконтакте', max_length=50, null=True, blank=True)
@@ -28,9 +24,10 @@ class Profile(models.Model):
     )
     git = models.CharField('Git', max_length=50, null=True, blank=True)
 
-    def __str__(self):
-        return self.user.username
-
     class Meta:
-        verbose_name = 'профиль'
-        verbose_name_plural = 'профили'
+        db_table = 'auth_user'
+        verbose_name = 'пользователь'
+        verbose_name_plural = 'пользователи'
+
+    def __str__(self):
+        return self.username

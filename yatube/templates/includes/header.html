@@ -21,13 +21,10 @@
           <li class="nav-item"> 
             <a class="nav-link {% if view_name == 'posts:post_create' %}active{% endif %}" href="{% url 'posts:post_create' %}">Новая запись</a>
           </li>
-          <li class="nav-item"> 
-            <a class="nav-link {% if view_name == 'users:profile' %}active{% endif %}" href="{% url 'users:profile' %}">Мой профиль</a>
-          </li>
-          <li class="nav-item"> 
+          <li class="nav-item">
             <a class="nav-link {% if view_name == 'users:password_change' %}active{% endif %}" href="{% url 'users:password_change' %}">Изменить пароль</a>
           </li>
-          <li class="nav-item"> 
+          <li class="nav-item">
             <a class="nav-link {% if view_name == 'users:logout' %}active{% endif %}" href="{% url 'users:logout' %}">Выйти</a>
           </li>
           {% endif %}

@@ -33,9 +33,8 @@ def profile(request, username):
     """Страница автора с его записями."""
     author = get_object_or_404(User, username=username)
     posts = author.posts.select_related('group')
-    following_list = Follow.objects.select_related('author').filter(
-        author__following__user=request.user.id).count()
-    following = following_list != 0
+    following = Follow.objects.filter(
+        user=request.user.id, author__following__author=author)
     context = {
         'author': author,
         'following': following,

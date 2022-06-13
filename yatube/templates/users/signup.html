@@ -8,7 +8,7 @@
           <div class="card-header">Зарегистрироваться</div>
             <div class="card-body">
               {% include 'includes/errors.html' %}
-              <form method="post" action="{% url 'users:signup' %}">
+              <form method="post" action="{% url 'users:signup' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% include 'includes/forms.html' %}
                 <div class="col-md-6 offset-md-4">

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Профайл автора {{ author.get_full_name }}{% endblock %}
+{% block title %}Профиль автора {{ author.get_full_name }}{% endblock %}
 {% block content %}
 {% load thumbnail %}
   <div class="container py-5">
@@ -8,7 +8,7 @@
         <div class="row">
           <aside class="col-md-4">
             {% thumbnail author.profile_pic "300x300" crop="center" upscale=True as im %}
-              <img class="rounded mx-auto d-block" src="{{ im.url }}">
+							<img class="rounded mx-auto d-block" src="{{ im.url }}">
             {% endthumbnail %}
           </aside>
           <article class="col-md-8">

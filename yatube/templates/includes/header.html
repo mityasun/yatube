@@ -16,13 +16,13 @@
             <a class="nav-link {% if view_name == 'posts:follow_index' %}active{% endif %}" href="{% url 'posts:follow_index' %}">Мои подписки</a>
           </li>
           <li class="nav-item"> 
-            <a class="nav-link" href="{% url 'posts:profile' request.user %}">Мои записи</a>
+            <a class="nav-link {% if view_name == 'posts:profile' %}active{% endif %}" href="{% url 'posts:profile' request.user %}">Мои записи</a>
           </li>
           <li class="nav-item"> 
             <a class="nav-link {% if view_name == 'posts:post_create' %}active{% endif %}" href="{% url 'posts:post_create' %}">Новая запись</a>
           </li>
 					<li class="nav-item">
-            <a class="nav-link" href="{% url 'posts:profile' request.user %}">Мой профиль</a>
+            <a class="nav-link {% if view_name == 'users:change' %}active{% endif %}" href="{% url 'users:change' %}">Мой профиль</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if view_name == 'users:password_change' %}active{% endif %}" href="{% url 'users:password_change' %}">Изменить пароль</a>

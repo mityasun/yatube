@@ -37,10 +37,10 @@
                 {% endif %}
               </li>
               {% if post.author == request.user %}
-              <li class="list-group-item">
-                <a href="{% url 'posts:post_edit' post.id %}" class="btn btn-outline-success btn-sm mb-1">Редактировать запись</a>
-                <a href="{% url 'posts:post_delete' post.id %}" class="btn btn-outline-danger btn-sm mb-1">Удалить запись</a>
-              </li>
+                <li class="list-group-item">
+                  <a href="{% url 'posts:post_edit' post.id %}" class="btn btn-outline-success btn-sm mb-1">Редактировать запись</a>
+                  <a href="{% url 'posts:post_delete' post.id %}" class="btn btn-outline-danger btn-sm mb-1">Удалить запись</a>
+                </li>
               {% endif %}
             </ul>
           </aside>

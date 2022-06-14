@@ -65,28 +65,28 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_author(self):
         """Проверка доступности адресов страниц для автора."""
-        rederict_to_profile = (
+        redirect_to_profile = (
             'posts:post_delete',
             'posts:profile_follow',
             'posts:profile_unfollow',
         )
-        rederict_to_post_detail = (
+        redirect_to_post_detail = (
             'posts:add_comment',
         )
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
-                if url in rederict_to_profile:
+                if url in redirect_to_profile:
                     response = self.authorized_client.get(
                         reverse_name, follow=True
                     )
-                    rederict = reverse('posts:profile', args=(self.user,))
-                    self.assertRedirects(response, rederict, HTTPStatus.FOUND)
-                elif url in rederict_to_post_detail:
+                    redirect = reverse('posts:profile', args=(self.user,))
+                    self.assertRedirects(response, redirect, HTTPStatus.FOUND)
+                elif url in redirect_to_post_detail:
                     response = self.authorized_client.get(
                         reverse_name, follow=True
                     )
-                    rederict = reverse('posts:post_detail', args=args)
+                    redirect = reverse('posts:post_detail', args=args)
                 else:
                     response = self.authorized_client.get(
                         reverse_name
@@ -95,11 +95,11 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_user(self):
         """Проверка доступности адресов страниц для пользователя."""
-        rederict_to_profile = (
+        redirect_to_profile = (
             'posts:profile_follow',
             'posts:profile_unfollow',
         )
-        rederict_to_post_detail = (
+        redirect_to_post_detail = (
             'posts:post_delete',
             'posts:post_edit',
             'posts:add_comment',
@@ -107,18 +107,18 @@ class PostURLTests(TestCase):
         for url, args, _, _ in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
-                if url in rederict_to_profile:
+                if url in redirect_to_profile:
                     response = self.authorized_client_no_author.get(
                         reverse_name, follow=True
                     )
-                    rederict = reverse('posts:profile', args=(self.user,))
-                    self.assertRedirects(response, rederict, HTTPStatus.FOUND)
-                elif url in rederict_to_post_detail:
+                    redirect = reverse('posts:profile', args=(self.user,))
+                    self.assertRedirects(response, redirect, HTTPStatus.FOUND)
+                elif url in redirect_to_post_detail:
                     response = self.authorized_client_no_author.get(
                         reverse_name, follow=True
                     )
-                    rederict = reverse('posts:post_detail', args=args)
-                    self.assertRedirects(response, rederict, HTTPStatus.FOUND)
+                    redirect = reverse('posts:post_detail', args=args)
+                    self.assertRedirects(response, redirect, HTTPStatus.FOUND)
                 else:
                     response = self.authorized_client_no_author.get(
                         reverse_name

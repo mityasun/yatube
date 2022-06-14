@@ -17,6 +17,7 @@ class UsersURLTests(TestCase):
         self.urls = (
             ('users:signup', '/auth/signup/', 'users/signup.html'),
             ('users:login', '/auth/login/', 'users/login.html'),
+            ('users:change', '/auth/change/', 'users/change.html'),
             ('users:password_change',
              '/auth/password_change/',
              'users/password_change_form.html'),
@@ -32,7 +33,6 @@ class UsersURLTests(TestCase):
             ('users:password_reset_complete',
              '/auth/reset/done/',
              'users/password_reset_complete.html'),
-            ('users:profile', '/auth/profile/', 'users/profile.html'),
             ('users:logout', '/auth/logout/', 'users/logged_out.html'),
 
         )
@@ -50,6 +50,7 @@ class UsersURLTests(TestCase):
             'users:password_change',
             'users:password_change_done',
             'users:profile',
+            'users:change',
             '/auth/logout/',
         )
         for url, _, _ in self.urls:

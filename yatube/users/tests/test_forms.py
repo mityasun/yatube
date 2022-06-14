@@ -8,7 +8,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
 
-from ..models import Profile
+from ..models import User
 
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
@@ -63,16 +63,16 @@ class UserFormTests(TestCase):
             'profile_pic': image,
         }
         response = self.authorized_client.post(
-            reverse('users:profile'),
+            reverse('users:change'),
             data=form_data,
             follow=True
         )
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertRedirects(response, reverse(
-            'users:profile'),
+            'posts:profile', args=(self.user.username,)),
             HTTPStatus.FOUND
         )
-        user = Profile.objects.first()
+        user = User.objects.first()
         check_edited_profile_fields = (
             (user.city, user.city),
             (user.vk, user.vk),

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from ..models import Profile
+from ..models import User
 
 User = get_user_model()
 
@@ -29,7 +29,6 @@ class UserModelTest(TestCase):
     def test_field_verboses_for_models(self):
         """Проверка verbose names."""
         field_verboses = {
-            'user': 'Пользователь',
             'profile_pic': 'Аватарка',
             'city': 'Город',
             'vk': 'Вконтакте',
@@ -40,4 +39,4 @@ class UserModelTest(TestCase):
         for field, expected in field_verboses.items():
             with self.subTest(field=field):
                 self.assertEqual(
-                    Profile._meta.get_field(field).verbose_name, expected)
+                    User._meta.get_field(field).verbose_name, expected)

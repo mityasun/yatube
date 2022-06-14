@@ -104,7 +104,7 @@ class PostViewsTests(TestCase):
         )
         self.check_context(response)
         self.assertEqual(response.context.get('author'), self.user)
-        self.assertContains(response, '<img', count=3)
+        self.assertContains(response, '<img', count=2)
 
     def test_group_list_page_show_correct_context(self):
         """Шаблон group_list сформирован с правильным контекстом."""
@@ -121,7 +121,7 @@ class PostViewsTests(TestCase):
             reverse('posts:post_detail', args=(self.post.id,))
         )
         self.check_context(response, True)
-        self.assertContains(response, '<img', count=3)
+        self.assertContains(response, '<img', count=2)
 
     def test_create_edit_page_show_correct_form(self):
         """post_create и post_edit сформированы с правильным контекстом."""

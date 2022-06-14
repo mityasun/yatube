@@ -6,7 +6,7 @@
         <div class="row">
           <aside class="col-12 col-md-4">
 					  <div class="card my-2">
-						  <h5 class="card-header">Автор</h5>
+						  <h5 class="card-header">Автор {{ post.author.get_full_name }}</h5>
 						  <div class="card-body">
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
@@ -22,7 +22,7 @@
 										{% endif %}
 									</li>
 									<li class="list-group-item">
-										Дата публикации: {{ post.pub_date|date:"d E Y" }}
+										Дата публикации: {{ post.pub_date|date:"d E Y H:i" }}
 									</li>
 									<li class="list-group-item">
 									{% if post.group %}
@@ -31,17 +31,23 @@
 										<span style='color:gray'>Этой записи нет ни в одном сообществе</span>
 									{% endif %}
 									</li>
-									<li class="list-group-item">
-										{% if post.author == request.user %}
+								  {% if post.author == request.user %}
+									  <li class="list-group-item">
 											Всего моих записей: <span>{{ post.author.posts.count }}</span>
-										{% else %}
-											Всего записей автора: <span>{{ post.author.posts.count }}</span>
-										{% endif %}
-									</li>
-									{% if post.author == request.user %}
+										</li>
+										<li class="list-group-item">
+										  Всего моих подписчиков: <span>{{ post.author.following.count }}</span>
+										</li>
 										<li class="list-group-item">
 											<a href="{% url 'posts:post_edit' post.id %}" class="btn btn-outline-success btn-sm mb-1">Редактировать запись</a>
 											<a href="{% url 'posts:post_delete' post.id %}" class="btn btn-outline-danger btn-sm mb-1">Удалить запись</a>
+										</li>
+									{% else %}
+										<li class="list-group-item">
+											Всего записей автора: <span>{{ post.author.posts.count }}</span>
+										</li>
+										<li class="list-group-item">
+										  Всего подписчиков автора: {{ post.author.following.count }}
 										</li>
 									{% endif %}
 								</ul>

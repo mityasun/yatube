@@ -25,7 +25,7 @@
 							<br>
 							<div>
 								{% if following %}
-									<a class="btn btn-danger" href="{% url 'posts:profile_unfollow' author.username %}" role="button">Отписаться</a>
+									<a class="btn btn-outline-danger" href="{% url 'posts:profile_unfollow' author.username %}" role="button">Отписаться</a>
 								{% else %}
 									<a class="btn btn-success" href="{% url 'posts:profile_follow' author.username %}" role="button">Подписаться</a>
 								{% endif %}

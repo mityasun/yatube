@@ -3,9 +3,9 @@
     Мои подписки
   {% endblock %}
   {% block content %} 
-    <div class="container py-5">
-      {% include 'posts/includes/switcher.html' %}  
-      <h1>Последние обновления моих подписок</h1>
+    <div class="container py-4">
+      {% include 'posts/includes/switcher.html' %}
+		  <div class="mb-4"><h1>Последние обновления моих подписок</h1></div>
       {% for post in page_obj %}
       {% include 'posts/includes/post_card.html' %}
       {% endfor %}

@@ -1,25 +1,22 @@
 {% load thumbnail %}
-<article>
-  <div class="card mb-3">
+  <div class="card mb-4">
     <div class="card-header">
-      <ul>
-        {% if author %}
-          <li>Автор: {{ post.author.get_full_name }}</li>
-        {% else %}
-          <li>Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a></li>
-        {% endif %}
-          <li>Дата публикации: {{ post.pub_date|date:"d E Y H:i" }}</li>
-      </ul>
+			{% if author %}
+				<h6 class="card-title">Автор: {{ post.author.get_full_name }}</h6>
+			{% else %}
+				<h6 class="card-title">Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a></h6>
+			{% endif %}
+				<span class="text-muted">Дата публикации: {{ post.pub_date|date:"d E Y H:i" }}</span>
     </div>
     <div class="card-body">
       {% thumbnail post.image "960x350" crop="center" upscale=True as im %}
         <img class="card-img my-2" src="{{ im.url }}">
       {% endthumbnail %}
-      {% if post.text|length > 500 %}
-        <p>{{ post.text|truncatechars_html:500|linebreaksbr }}</p>
+      {% if post.text|length > 300 %}
+        <p class="card-text">{{ post.text|truncatechars_html:300|linebreaksbr }}</p>
         <p><a href="{% url 'posts:post_detail' post.pk %}" class="btn btn-outline-dark btn-sm">Читать далее</a></p>
       {% else %}
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p class="card-text">{{ post.text|linebreaksbr }}</p>
         <p><a href="{% url 'posts:post_detail' post.pk %}" class="btn btn-outline-dark btn-sm">Читать далее</a></p>
       {% endif %}
     </div>
@@ -33,4 +30,3 @@
       </div>
     {% endif %}
   </div>
-</arcticle>

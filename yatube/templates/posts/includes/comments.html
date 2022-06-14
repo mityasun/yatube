@@ -1,30 +1,34 @@
 {% load user_filters %}
-<h5>Комментарии к записи:</h5>
-{% for comment in comments %}
-<div class="card my-2">
-  <div class="card-body">
-    <h6>
-    <a href="{% url 'posts:profile' comment.author.username %}">{{ comment.author.username }}</a>
-    <span class="text-muted">{{ comment.created }}</span>
-    </h6>
-    <p>{{ comment.text|linebreaksbr }}</p>
-  </div>
+<div class="card my-3">
+  <h5 class="card-header">Комментарии к записи:</h5>
+	{% for comment in comments %}
+	  <div class="card-body">
+      <div class="card my-sm-0">
+		    <div class="card-body">
+          <h6 class="card-title">
+				  <a href="{% url 'posts:profile' comment.author.username %}">{{ comment.author.username }}</a>
+				  <span class="text-muted">{{ comment.created }}</span>
+			    </h6>
+			    <p class="card-text">{{ comment.text|linebreaksbr }}</p>
+		    </div>
+		  </div>
+		</div>
+	{% endfor %}
 </div>
-{% endfor %}
 {% if user.is_authenticated %}
-<div class="card my-2">
-  <h5 class="card-header">Добавить комментарий:</h5>
-  <div class="card-body">
-    <form method="post" action="{% url 'posts:add_comment' post.pk %}">
-    {% csrf_token %}      
-    <div class="form-group mb-2">
-      {{ form.text|addclass:"form-control" }}
-      <small id="{{ form.text.id_for_label }}-help" class="form-text text-muted">{{ form.text.help_text|safe }}</small>
+  <div class="card my-2">
+		<h5 class="card-header">Добавить комментарий:</h5>
+		<div class="card-body">
+			<form method="post" action="{% url 'posts:add_comment' post.pk %}">
+			{% csrf_token %}
+			<div class="form-group mb-2">
+				{{ form.text|addclass:"form-control" }}
+				<small id="{{ form.text.id_for_label }}-help" class="form-text text-muted">{{ form.text.help_text|safe }}</small>
+			</div>
+				<button type="submit" class="btn btn-success">Отправить</button>
+			</form>
     </div>
-      <button type="submit" class="btn btn-success">Отправить</button>
-    </form>
   </div>
-</div>
 {% else %}
   <p><a href="{% url 'users:login' %}">Войдите</a> или <a href="{% url 'users:signup' %}">зарегистрируйтесь</a>, чтобы оставить комментарий.</p>
 {% endif %}

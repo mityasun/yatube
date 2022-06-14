@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Войти{% endblock %}
 {% block content %}
-  <div class="container">
+  <div class="container py-4">
     <div class="row justify-content-center">
-      <div class="col-md-5 p-5">
+      <div class="col-md-4">
         <div class="card">
-          <div class="card-header">
-            Войти на сайт
-          </div>
+          <div class="card-header">Войти на сайт</div>
           <div class="card-body">
             {% include 'includes/errors.html' %}
             <form method="post"
@@ -17,8 +15,8 @@
             >
             {% csrf_token %}
             {% include 'includes/forms.html' %}
-            <div class="col-md-10 offset-md-3">
-              <button type="submit" class="btn btn-dark">Войти</button>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-success">Войти</button>
               <a href="{% url 'users:password_reset' %}" class="btn btn-link">Забыли пароль?</a>
             </div>
             </form>

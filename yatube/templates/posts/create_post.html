@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
   {% block title %}{% if form.instance.pk %}Редактировать запись{% else %}Новая запись{% endif %}{% endblock %}
   {% block content %} 
-    <div class="container py-5">
+    <div class="container py-4">
       <div class="row justify-content-center">
-        <div class="col-md-8 p-10">
+        <div class="col-md-8">
           <div class="card">
             <div class="card-header">{% if form.instance.pk %}Редактировать запись{% else %}Новая запись{% endif %}</div>
             <div class="card-body">
@@ -11,7 +11,7 @@
               <form method="post" action="{% if form.instance.pk %}{% url 'posts:post_edit' form.instance.pk %}{% else %}{% url 'posts:post_create' %}{% endif %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% include 'includes/forms.html' %}
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-center">
                   <button type="submit" class="btn btn-success">
                     {% if form.instance.pk %}Сохранить{% else %}Добавить{% endif %}
                   </button>

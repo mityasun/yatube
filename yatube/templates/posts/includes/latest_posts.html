@@ -1,0 +1,11 @@
+{% load user_filters %}
+<div class="card my-2">
+  <h6 class="card-header">Последние записи:</h6>
+    <div class="card-body">
+			<ul>
+				{% for post in latest_posts %}
+					<li><a class="text-muted" href="{% url 'posts:post_detail' post.pk %}">{{ post.text|truncatechars_html:30 }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+</div>

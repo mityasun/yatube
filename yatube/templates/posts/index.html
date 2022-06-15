@@ -3,15 +3,36 @@
     Последние обновления на сайте
   {% endblock %}
   {% block content %}
+		{% load user_filters %}
     <div class="container py-4">
-      {% include 'posts/includes/switcher.html' %}
-			<div class="mb-4"><h1>Последние обновления на сайте</h1></div>
-      {% load cache %}
-      {% cache 20 sidebar index page_obj.number %}
-      {% for post in page_obj %}
-      {% include 'posts/includes/post_card.html' %}
-      {% endfor %}
-      {% include 'posts/includes/paginator.html' %}
-      {% endcache %}
+		  <div class="mb-4"><h1 class="display-5">Последние обновления на сайте</h1></div>
+					<div class="row my-3">
+						<aside class="col-md-6">
+							{% show_latest_posts 5 %}
+						</aside>
+						<article class="col-md-6">
+							<div class="card my-2">
+							<h6 class="card-header">Самые обсуждаемые записи:</h6>
+							<div class="card-body">
+							{% get_most_commented_posts as most_commented_posts %}
+							<ul>
+								{% for post in most_commented_posts %}
+									<li><a class="text-muted" href="{% url 'posts:post_detail' post.pk %}">{{ post.text|truncatechars_html:30 }}</a></li>
+								{% endfor %}
+							</ul>
+							</div>
+							</div>
+						</article>
+					</div>
+		      {% include 'posts/includes/switcher.html' %}
+				<div>
+				{% load cache %}
+				{% cache 20 sidebar index page_obj.number %}
+				{% for post in page_obj %}
+				{% include 'posts/includes/post_card.html' %}
+				{% endfor %}
+				{% include 'posts/includes/paginator.html' %}
+				{% endcache %}
+				</div>
     </div>
   {% endblock %}

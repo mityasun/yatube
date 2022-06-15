@@ -4,8 +4,8 @@
   {% endblock %}
   {% block content %} 
     <div class="container py-4">
-      {% include 'posts/includes/switcher.html' %}
-		  <div class="mb-4"><h1>Последние обновления моих подписок</h1></div>
+		  <div class="mb-4"><div class="mb-4"><h1 class="display-5">Последние обновления моих подписок</h1></div>
+			{% include 'posts/includes/switcher.html' %}
       {% for post in page_obj %}
       {% include 'posts/includes/post_card.html' %}
       {% endfor %}

@@ -3,12 +3,12 @@
 		<div class="container-fluid">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link {% if view_name == 'posts:index' %}active{% endif %}" href="{% url 'posts:index' %}">
+					<a class="nav-link text-muted {% if view_name == 'posts:index' %}active{% endif %}" href="{% url 'posts:index' %}">
 						Все записи
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link {% if view_name == 'posts:follow_index' %}active{% endif %}" href="{% url 'posts:follow_index' %}">
+					<a class="nav-link text-muted {% if view_name == 'posts:follow_index' %}active{% endif %}" href="{% url 'posts:follow_index' %}">
 						Мои подписки
 					</a>
 				</li>

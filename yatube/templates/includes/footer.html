@@ -1,7 +1,8 @@
 {% load user_filters %}
 <div>
-    <a href="{% url 'about:author' %}">Автор проекта</a> |
-    <a href="{% url 'about:tech' %}">Технологии</a>
+    <a class="text-muted" href="{% url 'about:author' %}">Автор проекта</a> |
+    <a class="text-muted" href="{% url 'about:tech' %}">Технологии</a>
 </div>
-<p>Записей на сайте: {% total_posts %}</p>
-<p>© {{ year }} Copyright <a href="{% url 'posts:index' %}"><span style="color:red">Ya</span>tube</a></p>
+<p class="my-1">Пользователей на сайте: {% total_users %} |
+Записей на сайте: {% total_posts %}</p>
+<p>© {{ year }} Copyright <a class="text-muted" href="{% url 'posts:index' %}"><span style="color:red">Ya</span>tube</a></p>

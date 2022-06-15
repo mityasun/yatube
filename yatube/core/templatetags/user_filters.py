@@ -1,6 +1,7 @@
 from django import template
 from django.db.models import Count
-from posts.models import Post
+from posts.models import Comment, Post
+from users.models import User
 
 register = template.Library()
 
@@ -13,6 +14,11 @@ def addclass(field, css):
 @register.simple_tag
 def total_posts():
     return Post.objects.count()
+
+
+@register.simple_tag
+def total_users():
+    return User.objects.count()
 
 
 @register.inclusion_tag('posts/includes/latest_posts.html')

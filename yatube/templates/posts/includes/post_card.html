@@ -4,7 +4,7 @@
 			{% if author %}
 				<h6 class="card-title">Автор: {{ post.author.get_full_name }}</h6>
 			{% else %}
-				<h6 class="card-title">Автор: <a href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a></h6>
+				<h6 class="card-title">Автор: <a class="text-muted" href="{% url 'posts:profile' post.author %}">{{ post.author.get_full_name }}</a></h6>
 			{% endif %}
 				<span class="text-muted">Дата публикации: {{ post.pub_date|date:"d E Y H:i" }}</span>
     </div>
@@ -22,11 +22,20 @@
     </div>
     {% if not group %}
       <div class="card-footer">
-      {% if post.group %}
-        Сообщество: <a href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>
-      {% else %}
-        <span style='color:gray'>Этой записи нет ни в одном сообществе</span>
-      {% endif %}
+				<div class="row">
+					<aside class="fluid">
+						{% if post.group %}
+							Сообщество: <a class="text-muted" href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title }}</a>
+						{% else %}
+							<span style='color:gray'>Этой записи нет ни в одном сообществе</span>
+						{% endif %}
+					</aside>
+				  <article class="fluid">
+						{% if post.comments.count > 0 %}
+					    Комментариев: <a class="text-muted" href="{% url 'posts:post_detail' post.pk %}">{{ post.comments.count }}</a>
+						{% endif %}
+					</article>
+				</div>
       </div>
     {% endif %}
   </div>

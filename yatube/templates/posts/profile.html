@@ -18,10 +18,10 @@
 							<h6>Всего записей: {{ author.posts.count }}</h6>
 							<h6>Подписчиков: {{ author.following.count }}</h6>
 							{% if author.city != None %}<div>Город: {{ author.city }}</div>{% endif %}
-							{% if author.vk != None %}<div>Вконтакте: <a href="https://vk.com/{{author.vk}}" target="_blank">{{ author.vk }}</a></div>{% endif %}
-							{% if author.telegram != None %}<div>Telegram: <a href="https://t.me/{{author.telegram}}" target="_blank">{{ author.telegram }}</a></div>{% endif %}
-							{% if author.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.instagram}}" target="_blank">{{ author.instagram }}</a></div>{% endif %}
-							{% if author.git != None %}<div>Git: <a href="https://github.com/{{author.git}}" target="_blank">{{ author.git }}</a></div>{% endif %}
+							{% if author.vk != None %}<div>Вконтакте: <a class="text-muted" href="https://vk.com/{{author.vk}}" target="_blank">{{ author.vk }}</a></div>{% endif %}
+							{% if author.telegram != None %}<div>Telegram: <a class="text-muted" href="https://t.me/{{author.telegram}}" target="_blank">{{ author.telegram }}</a></div>{% endif %}
+							{% if author.instagram != None %}<div>Instagram: <a class="text-muted" href="https://instagram.com/{{author.instagram}}" target="_blank">{{ author.instagram }}</a></div>{% endif %}
+							{% if author.git != None %}<div>Git: <a class="text-muted" href="https://github.com/{{author.git}}" target="_blank">{{ author.git }}</a></div>{% endif %}
 							<br>
 							<div>
 								{% if following %}
@@ -44,10 +44,10 @@
 							<h6>Всего моих записей: {{ author.posts.count }}</h6>
 							<h6>Подписчиков: {{ author.following.count }}</h6>
 							{% if author.city != None %}<div>Город: {{ author.city }}</div>{% endif %}
-							{% if author.vk != None %}<div>Вконтакте: <a href="https://vk.com/{{author.vk}}" target="_blank">{{ author.vk }}</a></div>{% endif %}
-							{% if author.telegram != None %}<div>Telegram: <a href="https://t.me/{{author.telegram}}" target="_blank">{{ author.telegram }}</a></div>{% endif %}
-							{% if author.instagram != None %}<div>Instagram: <a href="https://instagram.com/{{author.instagram}}" target="_blank">{{ author.instagram }}</a></div>{% endif %}
-							{% if author.git != None %}<div>Git: <a href="https://github.com/{{author.git}}" target="_blank">{{ author.git }}</a></div>{% endif %}
+							{% if author.vk != None %}<div>Вконтакте: <a class="text-muted" href="https://vk.com/{{author.vk}}" target="_blank">{{ author.vk }}</a></div>{% endif %}
+							{% if author.telegram != None %}<div>Telegram: <a class="text-muted" href="https://t.me/{{author.telegram}}" target="_blank">{{ author.telegram }}</a></div>{% endif %}
+							{% if author.instagram != None %}<div>Instagram: <a class="text-muted"  href="https://instagram.com/{{author.instagram}}" target="_blank">{{ author.instagram }}</a></div>{% endif %}
+							{% if author.git != None %}<div>Git: <a class="text-muted"  href="https://github.com/{{author.git}}" target="_blank">{{ author.git }}</a></div>{% endif %}
 							<br>
 							<div>
 								<a class="btn btn-outline-success" href="{% url 'users:change' %}">Изменить профиль</a>

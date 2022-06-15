@@ -1,17 +1,21 @@
 {% extends "base.html" %}
   {% block title %}Об авторе проекта{% endblock %}
   {% block content %}
-    <div class="container py-5">
-      <div class="row">
-      <aside class="col-md-4">
-        <img class="rounded mx-auto d-block img-fluid" src="/media/users/author.jpg"><br>
-      </aside>
-      <article class="col-md-8">
-        <h1>Привет, я автор этого проекта.</h1>
-        <p>Привет! Я Артем, мне 32, я из Екатеринбурга.</p>
-        <p>Работаю маркетологом в производственной компании, параллельно занимаюсь фрилансом (делаю сайты на Тильде, занимаюсь продвижением).</p>
-        <p>Учусь в Яндекс Практикуме на курсе Python-разработчик.</p>
-      </article>
-      </div>
+    <div class="container py-4">
+			<div class="card my-2">
+				<h1 class="card-header display-6">Привет, я автор этого проекта</h1>
+				<div class="card-body">
+					<div class="row">
+					<aside class="col-md-4">
+						<img class="rounded mx-auto d-block img-fluid" src="/media/users/author.jpg"><br>
+					</aside>
+					<article class="col-md-8">
+						<p>Привет! Я Артем, мне 32, я из Екатеринбурга.</p>
+						<p>Работаю маркетологом в производственной компании, параллельно занимаюсь фрилансом (делаю сайты на Тильде, занимаюсь продвижением).</p>
+						<p>Учусь в Яндекс Практикуме на курсе Python-разработчик.</p>
+					</article>
+					</div>
+				</div>
+			</div>
     </div>
   {% endblock %}

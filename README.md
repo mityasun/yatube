@@ -11,7 +11,9 @@
 
 ### Технологии
 Python 3.9.8<br>
-Django 2.2.28
+Django 2.2.28<br>
+Bootstrap<br>
+Jquery<br>
 
 ### Как запустить проект:
 

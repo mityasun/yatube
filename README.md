@@ -53,6 +53,13 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
+Указать собственный Django SECRET_KEY:
+
+```
+Создать файл .env в директории /yatube/yatube/ и прописать в нем:
+SECRET_KEY=*ваш ключ из 50ти символов*
+```
+
 Запустить проект:
 
 ```

@@ -1,8 +1,12 @@
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'ef!f^y&3l&*=j3twd$%(ityu(b)rd=9e&45^d0fvrmtr1qm(a-'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -101,13 +105,12 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 LIMIT_POSTS: int = 10
 CUT_TEXT: int = 15
 
-
+AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'posts:index'
 
@@ -121,5 +124,3 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-
-AUTH_USER_MODEL = 'users.User'

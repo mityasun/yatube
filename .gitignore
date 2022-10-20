@@ -146,6 +146,4 @@ dmypy.json
 .mypy_cache
 
 # Папки с медиа
-yatube/media/
-
-
+/yatube/media/

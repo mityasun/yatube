@@ -7,6 +7,7 @@ from .forms import CreationForm, UserUpdateForm
 
 def register(request):
     """Функция создания пользователя."""
+
     form = CreationForm(request.POST or None, files=request.FILES or None)
     if form.is_valid():
         form.save()
@@ -25,6 +26,7 @@ def register(request):
 @login_required
 def change(request):
     """Функция редактирования пользователя."""
+
     form = UserUpdateForm(
         request.POST or None,
         files=request.FILES or None,

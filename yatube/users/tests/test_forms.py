@@ -38,6 +38,7 @@ class UserFormTests(TestCase):
 
     def test_edit_profile(self):
         """Проверка формы профиля."""
+
         bytes_image = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
             b'\x01\x00\x80\x00\x00\x00\x00\x00'
@@ -97,6 +98,7 @@ class UserFormTests(TestCase):
 
     def test_register_form(self):
         """Проверка формы регистрации."""
+
         form_data = {
             'username': 'username',
             'first_name': 'Новое имя',

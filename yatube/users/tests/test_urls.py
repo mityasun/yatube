@@ -39,6 +39,7 @@ class UsersURLTests(TestCase):
 
     def test_reverse(self):
         """Проверка реверсов."""
+
         for url, hard_link, _ in self.urls:
             reverse_name = reverse(url)
             with self.subTest(reverse_name=hard_link):
@@ -46,6 +47,7 @@ class UsersURLTests(TestCase):
 
     def test_open_urls_exists_at_desired_location(self):
         """Проверка доступности адресов открытых страниц для гостя."""
+
         close_urls = (
             'users:password_change',
             'users:password_change_done',
@@ -70,6 +72,7 @@ class UsersURLTests(TestCase):
 
     def test_close_urls_exists_at_desired_location(self):
         """Проверка доступности адресов для пользователя."""
+
         for url, _, _ in self.urls:
             reverse_name = reverse(url)
             with self.subTest(reverse_name=reverse_name):
@@ -78,6 +81,7 @@ class UsersURLTests(TestCase):
 
     def test_urls_uses_correct_template(self):
         """Проверка шаблонов."""
+
         for url, _, template in self.urls:
             reverse_name = reverse(url)
             with self.subTest(url=url):

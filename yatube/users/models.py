@@ -5,7 +5,6 @@ from django.db import models
 class User(AbstractUser):
     profile_pic = models.ImageField(
         'Аватарка',
-        default='users/default.jpeg',
         upload_to='users/',
         null=True, blank=True,
         help_text='Добавить аватарку',

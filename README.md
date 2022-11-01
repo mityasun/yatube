@@ -3,68 +3,91 @@
 ***Здесь вы можете создавать свои записи, добавлять их в сообщества, подписываться на авторов и комментировать их записи.***
 
 ### Возможности проекта:
-- Регистрация с расширенным профилем и управление им.
+- Регистрация с расширенным профилем и управление им (переопределение модели User с помощью AbstractUser).
 - Публикация записей с изображениями.
 - Публикация записей в сообщества.
 - Комментарии к записям других авторов.
 - Подписка на других авторов.
+- Лента с записями, на которых оформлена подписка.
+- Пользовательские теги, отображающие самые обсуждаемые записи, последние записи и т.д.
+- Для проекта написаны тесты Unittest.
 
 ### Технологии
-Python 3.9.8<br>
-Django 2.2.28<br>
-Bootstrap<br>
-Jquery<br>
+- Python 3.9.8<br>
+- Django 2.2.28<br>
+- Bootstrap<br>
+- Jquery<br>
 
 ### Как запустить проект:
 
-Клонировать репозиторий и перейти в него в командной строке:
+Клонировать репозиторий и перейти в него в терминале:
 
 ```
 git clone https://github.com/mityasun/yatube.git
 ```
 
+Перейдите в директорию:
 ```
-cd api_final_yatube
-```
-
-Cоздать и активировать виртуальное окружение:
-
-```
-python -m venv env
+cd yatube/yatube/
 ```
 
-```
-source venv/bin/activate
-```
-
-Установить зависимости из файла requirements.txt:
+Создать файл .env в этой директории пропишите в нем:
 
 ```
-python -m pip install --upgrade pip
+SECRET_KEY=*Секретный ключ Django*
 ```
 
-```
-pip install -r requirements.txt
-```
-
-Выполнить миграции:
+Cоздать образ из Docker файла:
 
 ```
-python manage.py migrate
+docker build -t yatube .
 ```
 
-Указать собственный Django SECRET_KEY:
+Перейдите в директорию с настройками Docker-compose:
 
 ```
-Создать файл .env в директории /yatube/yatube/ и прописать в нем:
-SECRET_KEY=*ваш ключ из 50ти символов*
+cd yatube/docker-compose/
 ```
 
-Запустить проект:
+Создать файл .env в этой директории пропишите в нем настройки БД:
 
 ```
-python manage.py runserver
+DB_NAME=*Имя БД*
+POSTGRES_USER=*Имя пользователя БД*
+POSTGRES_PASSWORD=*Пароль пользователя БД*
+DB_HOST=db
+DB_PORT=5432
 ```
+
+Соберите образ из файла Docker-compose:
+```
+docker-compose up -d --build
+```
+
+Примените миграции:
+
+```
+docker-compose exec web python manage.py migrate
+```
+
+Соберите статику:
+
+```
+docker-compose exec web python manage.py collectstatic --no-input
+```
+
+Заполнить базу данными из копии:
+
+```
+docker-compose exec web python manage.py loaddata fixtures.json
+```
+
+Создайте суперпользователя:
+
+```
+docker-compose exec web python manage.py createsuperuser
+```
+
 <br>
 
 ### Автор проекта:

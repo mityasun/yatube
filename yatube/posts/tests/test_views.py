@@ -73,7 +73,6 @@ class PostViewsTests(TestCase):
 
     def test_pages_uses_correct_template(self):
         """view-функции использует соответствующий шаблон."""
-
         for url, args, template in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=reverse_name):
@@ -82,7 +81,6 @@ class PostViewsTests(TestCase):
 
     def check_context(self, response, bool=False):
         """Функция для передачи контекста."""
-
         if bool:
             post = response.context.get('post')
         else:
@@ -95,14 +93,12 @@ class PostViewsTests(TestCase):
 
     def test_index_page_show_correct_context(self):
         """Шаблон index сформирован с правильным контекстом."""
-
         response = self.authorized_client.get(reverse('posts:index'))
         self.check_context(response)
         self.assertContains(response, '<img', count=2)
 
     def test_profile_page_show_correct_context(self):
         """Шаблон profile сформирован с правильным контекстом."""
-
         response = self.authorized_client.get(
             reverse('posts:profile', args=(self.user,))
         )
@@ -112,7 +108,6 @@ class PostViewsTests(TestCase):
 
     def test_group_list_page_show_correct_context(self):
         """Шаблон group_list сформирован с правильным контекстом."""
-
         response = self.authorized_client.get(
             reverse('posts:group_list', args=(self.group.slug,))
         )
@@ -131,7 +126,6 @@ class PostViewsTests(TestCase):
 
     def test_create_edit_page_show_correct_form(self):
         """post_create и post_edit сформированы с правильным контекстом."""
-
         urls = (
             ('posts:post_create', None),
             ('posts:post_edit', (self.post.id,)),
@@ -155,7 +149,6 @@ class PostViewsTests(TestCase):
 
     def test_post_appears_at_group(self):
         """Пост НЕ появляется в другой группе."""
-
         Post.objects.create(
             author=self.user,
             text='Текстовый текст',
@@ -173,7 +166,6 @@ class PostViewsTests(TestCase):
 
     def test_post_delete(self):
         """Проверка удаления поста."""
-
         post = Post.objects.create(
             author=self.user,
             text='Пост для проверки функции удаления',
@@ -197,7 +189,6 @@ class PostViewsTests(TestCase):
 
     def test_cache(self):
         """Проверка работы кэша."""
-
         post = Post.objects.create(
             author=self.user,
             text='Пост для проверки кэша',
@@ -212,7 +203,6 @@ class PostViewsTests(TestCase):
 
     def test_users_can_follow_and_unfollow(self):
         """Зарегистрированный пользователь может подписаться и отписаться."""
-
         follower_qty = Follow.objects.count()
         response = self.authorized_client_no_author.get(
             reverse('posts:profile_follow', args=(self.user,))
@@ -233,7 +223,6 @@ class PostViewsTests(TestCase):
 
     def test_post_appears_at_feed(self):
         """Пост появляется в лента подписчика."""
-
         Follow.objects.get_or_create(
             user=self.user_no_author,
             author=self.user

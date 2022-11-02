@@ -24,7 +24,6 @@ class PostModelTest(TestCase):
 
     def test_models_have_correct_title_names(self):
         """Проверяем, что у моделей Group и Post корректно работает __str__."""
-
         title = (
             (self.group, self.group.title),
             (self.post, self.post.text[:settings.CUT_TEXT]),
@@ -35,7 +34,6 @@ class PostModelTest(TestCase):
 
     def test_field_verboses_for_models(self):
         """Проверка verbose names."""
-
         post = self.post
         field_verboses = {
             'author': 'Автор',
@@ -51,7 +49,6 @@ class PostModelTest(TestCase):
 
     def test_help_texts_for_models(self):
         """Проверка help_text."""
-
         post = self.post
         field_help_texts = {
             'group': 'Сообщество для вашей записи',

@@ -11,7 +11,6 @@ User = get_user_model()
 
 def index(request):
     """Главная страница с записями."""
-
     posts = Post.objects.select_related('author', 'group')
     context = {
         'page_obj': paginator(posts, request),
@@ -21,7 +20,6 @@ def index(request):
 
 def group_posts(request, slug):
     """Страница сообществ с записями."""
-
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.select_related('author')
     context = {
@@ -33,7 +31,6 @@ def group_posts(request, slug):
 
 def profile(request, username):
     """Страница автора с его записями."""
-
     author = get_object_or_404(User, username=username)
     posts = author.posts.select_related('group')
     following = Follow.objects.filter(
@@ -48,7 +45,6 @@ def profile(request, username):
 
 def post_detail(request, post_id):
     """Страница одной записи."""
-
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comments.select_related('author')
     form = CommentForm()
@@ -63,7 +59,6 @@ def post_detail(request, post_id):
 @login_required()
 def post_create(request):
     """Функция создания записи."""
-
     form = PostForm(request.POST or None, files=request.FILES or None)
     if form.is_valid():
         post = form.save(commit=False)
@@ -76,7 +71,6 @@ def post_create(request):
 @login_required
 def post_edit(request, post_id):
     """Функция редактирования записи."""
-
     post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
         return redirect('posts:post_detail', post_id)
@@ -93,7 +87,6 @@ def post_edit(request, post_id):
 @login_required
 def post_delete(request, post_id):
     """Функция удаления записи."""
-
     post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
         return redirect('posts:post_detail', post_id)
@@ -104,7 +97,6 @@ def post_delete(request, post_id):
 @login_required
 def add_comment(request, post_id):
     """Функция создания комментариев."""
-
     post = get_object_or_404(Post, pk=post_id)
     form = CommentForm(request.POST or None)
     if form.is_valid():
@@ -118,7 +110,6 @@ def add_comment(request, post_id):
 @login_required
 def follow_index(request):
     """Функция страницы с подписками."""
-
     posts = Post.objects.select_related('author', 'group').filter(
         author__following__user=request.user)
     context = {
@@ -130,7 +121,6 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
     """Функция подписки на автора."""
-
     author = get_object_or_404(User, username=username)
     follower = request.user
     if follower != author and follower != author.follower:
@@ -141,7 +131,6 @@ def profile_follow(request, username):
 @login_required
 def profile_unfollow(request, username):
     """Функция отписки от автора."""
-
     Follow.objects.filter(
         user=request.user,
         author__username=username

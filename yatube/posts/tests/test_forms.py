@@ -49,7 +49,6 @@ class PostFormTests(TestCase):
 
     def test_create_form(self):
         """Валидная форма create создает запись в Post."""
-
         bytes_image = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
             b'\x01\x00\x80\x00\x00\x00\x00\x00'
@@ -100,7 +99,6 @@ class PostFormTests(TestCase):
 
     def test_edit_form(self):
         """Валидная форма edit редактирует запись в Post."""
-
         bytes_image = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
             b'\x01\x00\x80\x00\x00\x00\x00\x00'
@@ -153,7 +151,6 @@ class PostFormTests(TestCase):
 
     def test_edit_form_only_for_author(self):
         """Запись может редактировать только автор + перенаправление."""
-
         roles = (
             (self.authorized_client_no_author,),
             (self.client,),
@@ -178,7 +175,6 @@ class PostFormTests(TestCase):
 
     def test_guest_cant_create_post(self):
         """Гость не может создавать записи."""
-
         reverse_name = reverse('posts:post_create')
         response = self.client.post(reverse_name)
         login = reverse(settings.LOGIN_URL)
@@ -190,7 +186,6 @@ class PostFormTests(TestCase):
 
     def test_comment_for_registered_users(self):
         """Комментарии могут оставлять зарегистрированные пользователи."""
-
         roles = (
             self.authorized_client.post,
             self.authorized_client_no_author.post,
@@ -216,7 +211,6 @@ class PostFormTests(TestCase):
 
     def test_comment_cant_comment(self):
         """Комментарии не могут оставлять гости."""
-
         comment_data = {
             'text': 'тестовый коммент',
         }
@@ -236,7 +230,6 @@ class PostFormTests(TestCase):
 
     def test_form_label(self):
         """Проверка labels формы."""
-
         labels = (
             (self.form.fields['text'].label, 'Текст записи'),
             (self.form.fields['group'].label, 'Выберите сообщество:'),

@@ -36,7 +36,6 @@ class PaginatorTests(TestCase):
 
     def test_paginator_correct(self):
         """Пагинатор работает корректно."""
-
         paginator = Paginator(Post.objects.all(), settings.LIMIT_POSTS)
         for url, args in self.urls:
             reverse_name = reverse(url, args=args)

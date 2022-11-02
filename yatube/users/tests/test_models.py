@@ -19,7 +19,6 @@ class UserModelTest(TestCase):
 
     def test_models_have_correct_title_names(self):
         """Проверяем, что у модели корректно работает __str__."""
-
         title = (
             (self.user.username, 'Author'),
         )
@@ -29,7 +28,6 @@ class UserModelTest(TestCase):
 
     def test_field_verboses_for_models(self):
         """Проверка verbose names."""
-
         field_verboses = {
             'profile_pic': 'Аватарка',
             'city': 'Город',

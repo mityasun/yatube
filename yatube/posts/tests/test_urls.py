@@ -58,7 +58,6 @@ class PostURLTests(TestCase):
 
     def test_reverse(self):
         """Проверка реверсов."""
-
         for url, args, _, hard_link in self.urls:
             reverse_name = reverse(url, args=args)
             with self.subTest(reverse_name=hard_link):
@@ -66,7 +65,6 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_author(self):
         """Проверка доступности адресов страниц для автора."""
-
         redirect_to_profile = (
             'posts:post_delete',
             'posts:profile_follow',
@@ -97,7 +95,6 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_user(self):
         """Проверка доступности адресов страниц для пользователя."""
-
         redirect_to_profile = (
             'posts:profile_follow',
             'posts:profile_unfollow',
@@ -130,7 +127,6 @@ class PostURLTests(TestCase):
 
     def test_urls_exists_at_desired_location_for_guest(self):
         """Проверка доступности адресов страниц для гостя."""
-
         rederict_urls = (
             'posts:post_create',
             'posts:post_edit',
@@ -157,7 +153,6 @@ class PostURLTests(TestCase):
 
     def test_urls_uses_correct_template_for_author(self):
         """Проверка использования шаблонов страниц."""
-
         without_template = (
             'posts:post_delete',
             'posts:profile_follow',
@@ -174,7 +169,6 @@ class PostURLTests(TestCase):
 
     def test_404_nonexistent_page(self):
         """Проверка 404 для несуществующих страниц."""
-
         url = '/unexisting_page/'
         roles = (
             self.authorized_client,

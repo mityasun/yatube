@@ -18,7 +18,6 @@ class StaticPagesURLTests(TestCase):
 
     def test_reverse(self):
         """Проверка реверсов."""
-
         for url, hard_link, _ in self.urls:
             reverse_name = reverse(url)
             with self.subTest(reverse_name=hard_link):
@@ -26,7 +25,6 @@ class StaticPagesURLTests(TestCase):
 
     def test_static_url_exists_at_desired_location(self):
         """Проверка доступности адреса статичных страниц."""
-
         for url, _, _ in self.urls:
             reverse_name = reverse(url)
             with self.subTest(reverse_name):
@@ -35,7 +33,6 @@ class StaticPagesURLTests(TestCase):
 
     def test_static_url_uses_correct_template(self):
         """Проверка шаблонов статичных страниц."""
-
         for url, _, template in self.urls:
             reverse_name = reverse(url)
             with self.subTest(reverse_name):

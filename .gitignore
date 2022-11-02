@@ -147,9 +147,4 @@ dmypy.json
 
 # Static and media folders
 yatube/media/
-yatube/static/
 yatube/sent_emails/
-
-static/
-
-.github

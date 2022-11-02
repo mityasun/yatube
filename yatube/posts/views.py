@@ -34,7 +34,7 @@ def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.select_related('group')
     following = Follow.objects.filter(
-        user=request.user.id, author__following__author=author)
+        user=request.user.id, following=author)
     context = {
         'author': author,
         'following': following,
@@ -121,10 +121,10 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
     """Функция подписки на автора."""
-    author = get_object_or_404(User, username=username)
+    following = get_object_or_404(User, username=username)
     follower = request.user
-    if follower != author and follower != author.follower:
-        Follow.objects.get_or_create(user=follower, author=author)
+    if follower != following and follower != following.follower:
+        Follow.objects.get_or_create(user=follower, following=following)
     return redirect('posts:profile', username)
 
 
@@ -133,6 +133,6 @@ def profile_unfollow(request, username):
     """Функция отписки от автора."""
     Follow.objects.filter(
         user=request.user,
-        author__username=username
+        following__username=username
     ).delete()
     return redirect('posts:profile', username)

@@ -1,5 +1,8 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.conf import settings
+
+User = get_user_model()
 
 
 class Group(models.Model):
@@ -19,7 +22,7 @@ class Post(models.Model):
     text = models.TextField('Текст записи', help_text='Текст вашей записи')
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='posts',
         verbose_name='Автор'
@@ -56,7 +59,7 @@ class Comment(models.Model):
     )
     created = models.DateTimeField('Дата публикации', auto_now_add=True)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='comments',
         verbose_name='Автор комментария'
@@ -64,7 +67,7 @@ class Comment(models.Model):
     post = models.ForeignKey(
         Post,
         blank=True, null=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='comments',
         verbose_name='Запись'
     )
@@ -79,13 +82,13 @@ class Comment(models.Model):
 
 class Follow(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.CASCADE,
         related_name='follower',
         verbose_name='Подписчик'
     )
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+    following = models.ForeignKey(
+        User,
         on_delete=models.CASCADE,
         related_name='following',
         verbose_name='Автор'
@@ -96,4 +99,4 @@ class Follow(models.Model):
         verbose_name_plural = 'подписчики'
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username}, {self.following.username}'

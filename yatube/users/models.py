@@ -24,7 +24,6 @@ class User(AbstractUser):
     git = models.CharField('Git', max_length=50, null=True, blank=True)
 
     class Meta:
-        db_table = 'auth_user'
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
 

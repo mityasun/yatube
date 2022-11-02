@@ -225,7 +225,7 @@ class PostViewsTests(TestCase):
         """Пост появляется в лента подписчика."""
         Follow.objects.get_or_create(
             user=self.user_no_author,
-            author=self.user
+            following=self.user
         )
         response = self.authorized_client_no_author.get(
             reverse('posts:follow_index')
@@ -233,7 +233,7 @@ class PostViewsTests(TestCase):
         self.assertContains(response, self.post)
         Follow.objects.filter(
             user=self.user_no_author,
-            author__username=self.user.username
+            following__username=self.user.username
         ).delete()
         response = self.authorized_client_no_author.get(
             reverse('posts:follow_index')

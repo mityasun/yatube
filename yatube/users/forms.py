@@ -11,7 +11,7 @@ class CreationForm(UserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'Ваше ник'}),
             'first_name': forms.TextInput(attrs={'placeholder': 'Ваше имя'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Ваша фамилия'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Фамилия'}),
             'email': forms.TextInput(attrs={'placeholder': 'Ваш e-mail'}),
             'city': forms.TextInput(attrs={'placeholder': 'Ваш город'}),
             'vk': forms.TextInput(attrs={'placeholder': 'Ваш ник Вконтакте'}),
@@ -46,7 +46,7 @@ class UserUpdateForm(forms.ModelForm):
 
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': 'Ваше имя'}),
-            'last_name': forms.TextInput(attrs={'placeholder': 'Ваша фамилия'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Фамилия'}),
             'email': forms.TextInput(attrs={'placeholder': 'Ваш e-mail'}),
             'city': forms.TextInput(attrs={'placeholder': 'Ваш город'}),
             'vk': forms.TextInput(attrs={'placeholder': 'Ваш ник Вконтакте'}),

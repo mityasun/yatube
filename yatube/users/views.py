@@ -17,8 +17,7 @@ def register(request):
         )
         login(request, new_user)
         return redirect('posts:index')
-    else:
-        form = CreationForm()
+    form = CreationForm()
     return render(request, 'users/signup.html', {'form': form})
 
 
@@ -33,6 +32,5 @@ def change(request):
     if form.is_valid():
         form.save()
         return redirect('posts:profile', request.user.username)
-    else:
-        form = UserUpdateForm(instance=request.user)
+    form = UserUpdateForm(instance=request.user)
     return render(request, 'users/change.html', {'form': form})

@@ -26,11 +26,11 @@
 <br>
 
 ### Технологии
-![Python](https://img.shields.io/badge/Python-3.9.8-%23254F72?style=for-the-badge&logo=python&logoColor=yellow&labelColor=254f72)
-![Django](https://img.shields.io/badge/Django-2.2.28-0C4B33?style=for-the-badge&logo=django&logoColor=white&labelColor=0C4B33)
-![Django](https://img.shields.io/badge/Django%20REST-3.12.4-802D2D?style=for-the-badge&logo=django&logoColor=white&labelColor=802D2D)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-712CF9?style=for-the-badge&logo=bootstrap&logoColor=white&labelColor=712CF9)
-![Jquery](https://img.shields.io/badge/Jquery-3.6.0.min.js-0769AD?style=for-the-badge&logo=jquery&logoColor=white&labelColor=0769AD)
+![Python](https://img.shields.io/badge/Python-3.9.8-%23254F72?style=flat-square&logo=python&logoColor=yellow&labelColor=254f72)
+![Django](https://img.shields.io/badge/Django-2.2.28-0C4B33?style=flat-square&logo=django&logoColor=white&labelColor=0C4B33)
+![Django](https://img.shields.io/badge/Django%20REST-3.12.4-802D2D?style=flat-square&logo=django&logoColor=white&labelColor=802D2D)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-712CF9?style=flat-square&logo=bootstrap&logoColor=white&labelColor=712CF9)
+![Jquery](https://img.shields.io/badge/Jquery-3.6.0.min.js-0769AD?style=flat-square&logo=jquery&logoColor=white&labelColor=0769AD)
 
 ### Как запустить проект:
 

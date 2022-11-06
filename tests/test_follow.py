@@ -34,7 +34,7 @@ def search_refind(execution, user_code):
 
 class TestFollow:
 
-    @pytest.mark.parametrize('field_name', ['author', 'user'])
+    @pytest.mark.parametrize('field_name', ['following', 'user'])
     def test_follow(self, field_name):
         model_name = 'Follow'
         related_name = 'follower' if field_name == 'user' else 'following'

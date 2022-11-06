@@ -1,3 +1,5 @@
+![Test and push to Docker Hub](https://github.com/mityasun/yatube/actions/workflows/yatube_workflow.yml/badge.svg)
+
 ## Проект Yatube - социальная сеть для авторов.
 
 ***Здесь вы можете создавать свои записи, добавлять их в сообщества, подписываться на авторов и комментировать их записи.***
@@ -24,11 +26,11 @@
 <br>
 
 ### Технологии
-- Python 3.9.8<br>
-- Django 2.2.28<br>
-- Django REST framework<br>
-- Bootstrap<br>
-- Jquery<br>
+![Python](https://img.shields.io/badge/Python-3.9.8-%23254F72?style=for-the-badge&logo=python&logoColor=yellow&labelColor=254f72)
+![Django](https://img.shields.io/badge/Django-2.2.28-0C4B33?style=for-the-badge&logo=django&logoColor=white&labelColor=0C4B33)
+![Django](https://img.shields.io/badge/Django%20REST-3.12.4-802D2D?style=for-the-badge&logo=django&logoColor=white&labelColor=802D2D)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.1.3-712CF9?style=for-the-badge&logo=bootstrap&logoColor=white&labelColor=712CF9)
+![Jquery](https://img.shields.io/badge/Jquery-3.6.0.min.js-0769AD?style=for-the-badge&logo=jquery&logoColor=white&labelColor=0769AD)
 
 ### Как запустить проект:
 
@@ -43,12 +45,6 @@ git clone https://github.com/mityasun/yatube.git
 cd yatube/yatube/
 ```
 
-Создать файл .env в этой директории пропишите в нем:
-
-```
-SECRET_KEY=*Секретный ключ Django*
-```
-
 Cоздать образ из Docker файла:
 
 ```
@@ -58,12 +54,15 @@ docker build -t yatube .
 Перейдите в директорию с настройками Docker-compose:
 
 ```
-cd yatube/docker-compose/
+cd yatube/infra/
 ```
 
 Создать файл .env в этой директории пропишите в нем настройки БД:
 
 ```
+SECRET_KEY=*Секретный ключ Django*
+DEBUG=*False для прода и True для тестов*
+ALLOWED_HOSTS=*Список разрешенных хостов*
 DB_NAME=*Имя БД*
 POSTGRES_USER=*Имя пользователя БД*
 POSTGRES_PASSWORD=*Пароль пользователя БД*

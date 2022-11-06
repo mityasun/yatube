@@ -1,6 +1,6 @@
 from django import template
 from django.db.models import Count
-from posts.models import Comment, Post
+from posts.models import Post
 from users.models import User
 
 register = template.Library()

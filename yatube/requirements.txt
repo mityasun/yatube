@@ -33,7 +33,7 @@ mixer==7.1.2
 oauthlib==3.2.1
 packaging==21.3
 pep8-naming==0.13.2
-Pillow==9.1.1
+Pillow==9.3.0
 pluggy==0.13.1
 psycopg2-binary==2.8.6
 py==1.11.0
